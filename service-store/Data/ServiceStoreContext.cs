@@ -15,5 +15,6 @@ namespace ServiceStore.Models
         }
 
         public DbSet<ServiceTeam> ServiceTeam { get; set; }
+        public DbSet<ServiceItem> ServiceItems { get; set; }
     }
 }

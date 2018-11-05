@@ -1,0 +1,43 @@
+﻿@page
+@model ServiceStore.Pages.SearchModel
+
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Search</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceTeam[0].Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ServiceTeam) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @foreach( var serviceItem in item.ServiceItems)
+                {
+                    <p>@serviceItem.Title</p>
+                }
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

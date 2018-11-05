@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -21,8 +22,9 @@ namespace ServiceStore.Pages
 
         public async Task<IActionResult> OnGetAsync(string StoreName)
         {
-            //ServiceTeam = await _context.ServiceTeam.FindAsync(id);
-            ServiceTeam = new ServiceTeam();
+            var trash = _context.ServiceItems.ToList();
+            ServiceTeam = await _context.ServiceTeam.Where(b => b.Name == StoreName).FirstOrDefaultAsync();
+
             ServicesCount = ServiceTeam.ServiceItems.Count;
 
             return Page();
