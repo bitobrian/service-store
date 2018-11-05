@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace service_store.Pages
+namespace ServiceStore.Pages
 {
     public class ContactModel : PageModel
     {
@@ -12,7 +12,7 @@ namespace service_store.Pages
 
         public void OnGet()
         {
-            Message = "Your contact page.";
+            Message = "This application is supported by the development community. You can get help by utilizing Gitlab Issues or the Mattermost channel.";
         }
     }
 }

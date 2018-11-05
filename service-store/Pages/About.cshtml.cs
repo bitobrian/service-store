@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace service_store.Pages
+namespace ServiceStore.Pages
 {
     public class AboutModel : PageModel
     {
@@ -12,7 +12,7 @@ namespace service_store.Pages
 
         public void OnGet()
         {
-            Message = "Your application description page.";
+            Message = "This application is built using ASP.NET Core 2.1 and Razor frameworks. It is an open repository, continuously delivered, and served on Cloud Foundry.";
         }
     }
 }

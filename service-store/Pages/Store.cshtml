@@ -1,0 +1,38 @@
+﻿@page "{StoreName}"
+@model ServiceStore.Pages.StoreModel
+
+@{
+    ViewData["Title"] = "Store";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@Model.ServiceTeam.Name Store</h1>
+<h2>@Model.ServicesCount Services Offered</h2>
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h3 class="text-white">Table Name Y'all</h3>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ServiceTeam.ServiceItems)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
