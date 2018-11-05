@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
 using ServiceStore.Models;
+using Steeltoe.CloudFoundry.Connector.MySql;
+using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
 
 namespace ServiceStore
 {
@@ -26,6 +23,15 @@ namespace ServiceStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
+
+            services.ConfigureCloudFoundryOptions(Configuration);
+
+            services.AddMySqlConnection(Configuration);
+            
+            services.AddDbContext<ServiceStoreContext>(options =>
+                options.UseMySql(Configuration));
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -38,8 +44,6 @@ namespace ServiceStore
             //services.AddEntityFrameworkInMemoryDatabase();
             //services.AddDbContext<ServiceStoreContext>(options =>
             //        options.UseSqlServer(Configuration.GetConnectionString("ServiceStoreContext")));
-            services.AddDbContext<ServiceStoreContext>(options =>
-                options.UseInMemoryDatabase("ServiceStoreContext"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
+using Steeltoe.Extensions.Configuration.ConfigServer;
 
 namespace ServiceStore
 {
@@ -12,6 +14,8 @@ namespace ServiceStore
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseCloudFoundryHosting()
+                .AddConfigServer()
                 .UseStartup<Startup>();
     }
 }
